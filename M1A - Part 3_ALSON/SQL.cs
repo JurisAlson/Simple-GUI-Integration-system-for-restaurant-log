@@ -27,21 +27,6 @@ namespace M1A___Part_3_ALSON
             }
         }
 
-        //public static DataTable RunQuery(string sql)
-        //{
-        //    using (OracleConnection conn = new OracleConnection(connectionString))
-        //    using (OracleCommand cmd = new OracleCommand(sql, conn))
-        //    {
-        //        conn.Open();
-        //        DataTable dt = new DataTable();
-        //        using (OracleDataAdapter da = new OracleDataAdapter(cmd))
-        //        {
-        //            da.Fill(dt);
-        //        }
-        //        return dt;
-        //    }
-
-        //}
         public static void InsertCustomer(int customerID, string firstName, string lastName, string address, string phoneNumber, string email)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
@@ -83,6 +68,47 @@ namespace M1A___Part_3_ALSON
             }
         }
 
+        public static void InsertProduct(int productId, string productName, string description, decimal price, string category)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "INSERT INTO Product (ProductID, ProductName, Description, Price, Category) " +
+                    "VALUES (:productId, :productName, :description, :price, :category)", conn))
+                {
+                    cmd.Parameters.Add(":productId", OracleDbType.Int32).Value = productId;
+                    cmd.Parameters.Add(":productName", OracleDbType.Varchar2).Value = productName;
+                    cmd.Parameters.Add(":description", OracleDbType.Varchar2).Value = description;
+                    cmd.Parameters.Add(":price", OracleDbType.Decimal).Value = price;
+                    cmd.Parameters.Add(":category", OracleDbType.Varchar2).Value = category;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // Payment
+        public static void InsertPayment(int paymentId, int orderId, DateTime paymentDate, decimal paymentAmount, string paymentMethod, string paymentStatus)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "INSERT INTO Payment (PaymentID, OrderID, PaymentDate, PaymentAmount, PaymentMethod, PaymentStatus) " +
+                    "VALUES (:paymentId, :orderId, :paymentDate, :paymentAmount, :paymentMethod, :paymentStatus)", conn))
+                {
+                    cmd.Parameters.Add(":paymentId", OracleDbType.Int32).Value = paymentId;
+                    cmd.Parameters.Add(":orderId", OracleDbType.Int32).Value = orderId;
+                    cmd.Parameters.Add(":paymentDate", OracleDbType.Date).Value = paymentDate;
+                    cmd.Parameters.Add(":paymentAmount", OracleDbType.Decimal).Value = paymentAmount;
+                    cmd.Parameters.Add(":paymentMethod", OracleDbType.Varchar2).Value = paymentMethod;
+                    cmd.Parameters.Add(":paymentStatus", OracleDbType.Varchar2).Value = paymentStatus;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
 
         public static void DeleteCustomer(int customerId)

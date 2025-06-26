@@ -17,6 +17,9 @@ namespace M1A___Part_3_ALSON
             InitializeComponent();
             button2.Click += button2_Click;
             button3.Click += button3_Click;
+            button4.Click += button4_Click;
+            button5.Click += button5_Click;
+            button6.Click += button6_Click;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -123,7 +126,6 @@ namespace M1A___Part_3_ALSON
                 SQL.InsertOrder(orderId, customerId, orderDate, totalAmount, orderStatus);
                 MessageBox.Show("Order inserted successfully!");
 
-                // Clear fields
                 textBoxOrderID.Clear();
                 textBoxOrderCustomerID.Clear();
                 textBoxOrderDate.Clear();
@@ -135,6 +137,148 @@ namespace M1A___Part_3_ALSON
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        // Product
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string productIdText = textBoxProductID.Text.Trim();
+            string productName = textBoxProductName.Text.Trim();
+            string description = textBoxDescription.Text.Trim();
+            string priceText = textBoxPrice.Text.Trim();
+            string category = comboBoxCategory.Text.Trim();
+
+            // Validation
+            if (string.IsNullOrEmpty(productIdText) ||
+                string.IsNullOrEmpty(productName) ||
+                string.IsNullOrEmpty(description) ||
+                string.IsNullOrEmpty(priceText) ||
+                string.IsNullOrEmpty(category))
+            {
+                MessageBox.Show("Please fill in all product fields.");
+                return;
+            }
+
+            if (!int.TryParse(productIdText, out int productId))
+            {
+                MessageBox.Show("Product ID must be a valid number.");
+                return;
+            }
+
+            if (!decimal.TryParse(priceText, out decimal price))
+            {
+                MessageBox.Show("Price must be a valid decimal number.");
+                return;
+            }
+
+            string[] validCategories = { "BreakFast", "Lunch", "Dinner" };
+            if (!validCategories.Contains(category))
+            {
+                MessageBox.Show("Category must be one of: BreakFast, Lunch, Dinner.");
+                return;
+            }
+
+            try
+            {
+                SQL.InsertProduct(productId, productName, description, price, category);
+                MessageBox.Show("Product added successfully!");
+
+                // Clear fields
+                textBoxProductID.Clear();
+                textBoxProductName.Clear();
+                textBoxDescription.Clear();
+                textBoxPrice.Clear();
+                comboBoxCategory.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        //Payment
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string paymentIDText = PaymentID.Text.Trim();
+            string orderIDText = textorderID.Text.Trim();
+            string paymentDateText = textpaymentdate.Text.Trim();
+            string paymentMethod = textstatus.Text.Trim(); // Should only be used for method
+            string paymentStatus = paymenttext.Text.Trim();
+            //string amountText = textAmount.Text.Trim();  // This should hold the amount
+
+            // Validate required fields
+            if (string.IsNullOrEmpty(paymentIDText) ||
+                string.IsNullOrEmpty(orderIDText) ||
+                string.IsNullOrEmpty(paymentDateText) ||
+                string.IsNullOrEmpty(paymentStatus) ||
+                string.IsNullOrEmpty(paymentMethod)) 
+                //string.IsNullOrEmpty(amountText))
+            {
+                MessageBox.Show("Please fill in all payment fields.");
+                return;
+            }
+
+            // Convert numeric fields
+            if (!int.TryParse(paymentIDText, out int paymentID))
+            {
+                MessageBox.Show("Payment ID must be a valid number.");
+                return;
+            }
+
+            if (!int.TryParse(orderIDText, out int orderID))
+            {
+                MessageBox.Show("Order ID must be a valid number.");
+                return;
+            }
+
+            //if (!decimal.TryParse(amountText, out decimal paymentAmount))
+            //{
+            //    MessageBox.Show("Payment amount must be a valid decimal number.");
+            //    return;
+            //}
+
+            if (!DateTime.TryParse(paymentDateText, out DateTime paymentDate))
+            {
+                MessageBox.Show("Payment date must be a valid date.");
+                return;
+            }
+
+            // Validate method and status
+            string[] validMethods = { "Cash on Delivery", "Card" };
+            if (!validMethods.Contains(paymentMethod))
+            {
+                MessageBox.Show("Payment method must be either 'Cash on Delivery' or 'Card'.");
+                return;
+            }
+
+            string[] validStatuses = { "Processing", "Completed", "Cancelled" };
+            if (!validStatuses.Contains(paymentStatus))
+            {
+                MessageBox.Show("Payment status must be one of: Processing, Completed, Cancelled.");
+                return;
+            }
+
+            // Perform insertion
+            try
+            {
+                SQL.InsertPayment(paymentID, orderID, paymentDate, paymentMethod, paymentStatus);
+                MessageBox.Show("Payment added successfully!");
+
+                // Clear fields
+                PaymentID.Clear();
+                textorderID.Clear();
+                textpaymentdate.Clear();
+                //textAmount.Clear();
+                textstatus.Clear();
+                //paymenttext.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
+
 
 
 
@@ -157,25 +301,24 @@ namespace M1A___Part_3_ALSON
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxOrderDate = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBoxOrderStatus = new System.Windows.Forms.TextBox();
+            this.textBoxTotalAmount = new System.Windows.Forms.TextBox();
+            this.textBoxOrderCustomerID = new System.Windows.Forms.TextBox();
+            this.textBoxOrderID = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.comboBoxCategory = new System.Windows.Forms.TextBox();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
+            this.textBoxProductName = new System.Windows.Forms.TextBox();
+            this.textBoxProductID = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textboxCustomerID = new System.Windows.Forms.TextBox();
@@ -184,32 +327,29 @@ namespace M1A___Part_3_ALSON
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
+            this.PaymentID = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
-            this.textBox19 = new System.Windows.Forms.TextBox();
+            this.paymenttext = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
+            this.textstatus = new System.Windows.Forms.TextBox();
+            this.textorderID = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textpaymentdate = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button2
@@ -321,18 +461,18 @@ namespace M1A___Part_3_ALSON
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(322, 246);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.Size = new System.Drawing.Size(66, 13);
             this.label7.TabIndex = 25;
-            this.label7.Text = "totalAmount";
+            this.label7.Text = "Order Status";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(322, 210);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 13);
+            this.label8.Size = new System.Drawing.Size(70, 13);
             this.label8.TabIndex = 24;
-            this.label8.Text = "Phone Nmber";
+            this.label8.Text = "Total Amount";
             // 
             // label9
             // 
@@ -343,12 +483,12 @@ namespace M1A___Part_3_ALSON
             this.label9.TabIndex = 23;
             this.label9.Text = "Order Date";
             // 
-            // textBox2
+            // textBoxOrderDate
             // 
-            this.textBox2.Location = new System.Drawing.Point(405, 148);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(151, 20);
-            this.textBox2.TabIndex = 22;
+            this.textBoxOrderDate.Location = new System.Drawing.Point(405, 148);
+            this.textBoxOrderDate.Name = "textBoxOrderDate";
+            this.textBoxOrderDate.Size = new System.Drawing.Size(151, 20);
+            this.textBoxOrderDate.TabIndex = 22;
             // 
             // label10
             // 
@@ -366,133 +506,125 @@ namespace M1A___Part_3_ALSON
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(47, 13);
             this.label11.TabIndex = 20;
-            this.label11.Text = "OrderI D";
+            this.label11.Text = "Order ID";
             // 
-            // textBox3
+            // textBoxOrderStatus
             // 
-            this.textBox3.Location = new System.Drawing.Point(405, 243);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(151, 20);
-            this.textBox3.TabIndex = 19;
+            this.textBoxOrderStatus.Location = new System.Drawing.Point(405, 243);
+            this.textBoxOrderStatus.Name = "textBoxOrderStatus";
+            this.textBoxOrderStatus.Size = new System.Drawing.Size(151, 20);
+            this.textBoxOrderStatus.TabIndex = 19;
             // 
-            // textBox4
+            // textBoxTotalAmount
             // 
-            this.textBox4.Location = new System.Drawing.Point(405, 203);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(151, 20);
-            this.textBox4.TabIndex = 18;
+            this.textBoxTotalAmount.Location = new System.Drawing.Point(405, 203);
+            this.textBoxTotalAmount.Name = "textBoxTotalAmount";
+            this.textBoxTotalAmount.Size = new System.Drawing.Size(151, 20);
+            this.textBoxTotalAmount.TabIndex = 18;
             // 
-            // textBox5
+            // textBoxOrderCustomerID
             // 
-            this.textBox5.Location = new System.Drawing.Point(405, 105);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(151, 20);
-            this.textBox5.TabIndex = 17;
+            this.textBoxOrderCustomerID.Location = new System.Drawing.Point(405, 105);
+            this.textBoxOrderCustomerID.Name = "textBoxOrderCustomerID";
+            this.textBoxOrderCustomerID.Size = new System.Drawing.Size(151, 20);
+            this.textBoxOrderCustomerID.TabIndex = 17;
             // 
-            // textBox6
+            // textBoxOrderID
             // 
-            this.textBox6.Location = new System.Drawing.Point(410, 67);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(151, 20);
-            this.textBox6.TabIndex = 16;
+            this.textBoxOrderID.Location = new System.Drawing.Point(410, 67);
+            this.textBoxOrderID.Name = "textBoxOrderID";
+            this.textBoxOrderID.Size = new System.Drawing.Size(151, 20);
+            this.textBoxOrderID.TabIndex = 16;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(481, 337);
+            this.button3.Location = new System.Drawing.Point(481, 297);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 15;
             this.button3.Text = "Insert";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(601, 264);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(32, 13);
+            this.label12.Size = new System.Drawing.Size(49, 13);
             this.label12.TabIndex = 37;
-            this.label12.Text = "Email";
+            this.label12.Text = "Category";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(601, 212);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(72, 13);
+            this.label13.Size = new System.Drawing.Size(31, 13);
             this.label13.TabIndex = 36;
-            this.label13.Text = "Phone Nmber";
+            this.label13.Text = "Price";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(601, 172);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(45, 13);
+            this.label14.Size = new System.Drawing.Size(60, 13);
             this.label14.TabIndex = 35;
-            this.label14.Text = "Address";
+            this.label14.Text = "Description";
             // 
-            // textBox7
+            // textBoxDescription
             // 
-            this.textBox7.Location = new System.Drawing.Point(684, 165);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(151, 20);
-            this.textBox7.TabIndex = 34;
+            this.textBoxDescription.Location = new System.Drawing.Point(684, 165);
+            this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.Size = new System.Drawing.Size(151, 20);
+            this.textBoxDescription.TabIndex = 34;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(601, 117);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(58, 13);
+            this.label15.Size = new System.Drawing.Size(75, 13);
             this.label15.TabIndex = 33;
-            this.label15.Text = "Last Name";
+            this.label15.Text = "Product Name";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(601, 61);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(57, 13);
+            this.label16.Size = new System.Drawing.Size(58, 13);
             this.label16.TabIndex = 32;
-            this.label16.Text = "First Name";
+            this.label16.Text = "Product ID";
             // 
-            // textBox8
+            // comboBoxCategory
             // 
-            this.textBox8.Location = new System.Drawing.Point(684, 261);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(151, 20);
-            this.textBox8.TabIndex = 31;
+            this.comboBoxCategory.Location = new System.Drawing.Point(684, 261);
+            this.comboBoxCategory.Name = "comboBoxCategory";
+            this.comboBoxCategory.Size = new System.Drawing.Size(151, 20);
+            this.comboBoxCategory.TabIndex = 31;
             // 
-            // textBox9
+            // textBoxPrice
             // 
-            this.textBox9.Location = new System.Drawing.Point(684, 205);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(151, 20);
-            this.textBox9.TabIndex = 30;
+            this.textBoxPrice.Location = new System.Drawing.Point(684, 205);
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(151, 20);
+            this.textBoxPrice.TabIndex = 30;
             // 
-            // textBox10
+            // textBoxProductName
             // 
-            this.textBox10.Location = new System.Drawing.Point(684, 116);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(151, 20);
-            this.textBox10.TabIndex = 29;
+            this.textBoxProductName.Location = new System.Drawing.Point(684, 116);
+            this.textBoxProductName.Name = "textBoxProductName";
+            this.textBoxProductName.Size = new System.Drawing.Size(151, 20);
+            this.textBoxProductName.TabIndex = 29;
             // 
-            // textBox11
+            // textBoxProductID
             // 
-            this.textBox11.Location = new System.Drawing.Point(684, 60);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(151, 20);
-            this.textBox11.TabIndex = 28;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(760, 299);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 27;
-            this.button4.Text = "Insert";
-            this.button4.UseVisualStyleBackColor = true;
+            this.textBoxProductID.Location = new System.Drawing.Point(684, 60);
+            this.textBoxProductID.Name = "textBoxProductID";
+            this.textBoxProductID.Size = new System.Drawing.Size(151, 20);
+            this.textBoxProductID.TabIndex = 28;
             // 
             // label17
             // 
@@ -553,9 +685,9 @@ namespace M1A___Part_3_ALSON
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(65, 393);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(65, 13);
+            this.label22.Size = new System.Drawing.Size(70, 13);
             this.label22.TabIndex = 54;
-            this.label22.Text = "Customer ID";
+            this.label22.Text = "Order Item ID";
             // 
             // textBox12
             // 
@@ -564,32 +696,23 @@ namespace M1A___Part_3_ALSON
             this.textBox12.Size = new System.Drawing.Size(151, 20);
             this.textBox12.TabIndex = 53;
             // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(64, 633);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(32, 13);
-            this.label23.TabIndex = 52;
-            this.label23.Text = "Email";
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(64, 581);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(72, 13);
+            this.label24.Size = new System.Drawing.Size(41, 13);
             this.label24.TabIndex = 51;
-            this.label24.Text = "Phone Nmber";
+            this.label24.Text = "Item ID";
             // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(64, 541);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(45, 13);
+            this.label25.Size = new System.Drawing.Size(46, 13);
             this.label25.TabIndex = 50;
-            this.label25.Text = "Address";
+            this.label25.Text = "Quantity";
             // 
             // textBox13
             // 
@@ -605,23 +728,16 @@ namespace M1A___Part_3_ALSON
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(58, 13);
             this.label26.TabIndex = 48;
-            this.label26.Text = "Last Name";
+            this.label26.Text = "Product ID";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(64, 430);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(57, 13);
+            this.label27.Size = new System.Drawing.Size(47, 13);
             this.label27.TabIndex = 47;
-            this.label27.Text = "First Name";
-            // 
-            // textBox14
-            // 
-            this.textBox14.Location = new System.Drawing.Point(147, 630);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(151, 20);
-            this.textBox14.TabIndex = 46;
+            this.label27.Text = "Order ID";
             // 
             // textBox15
             // 
@@ -646,12 +762,13 @@ namespace M1A___Part_3_ALSON
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(223, 668);
+            this.button5.Location = new System.Drawing.Point(224, 609);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 42;
             this.button5.Text = "Insert";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // label28
             // 
@@ -667,100 +784,69 @@ namespace M1A___Part_3_ALSON
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(327, 394);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(65, 13);
+            this.label29.Size = new System.Drawing.Size(62, 13);
             this.label29.TabIndex = 68;
-            this.label29.Text = "Customer ID";
+            this.label29.Text = "Payment ID";
             // 
-            // textBox18
+            // PaymentID
             // 
-            this.textBox18.Location = new System.Drawing.Point(410, 393);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(151, 20);
-            this.textBox18.TabIndex = 67;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(326, 634);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(32, 13);
-            this.label30.TabIndex = 66;
-            this.label30.Text = "Email";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(326, 582);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(72, 13);
-            this.label31.TabIndex = 65;
-            this.label31.Text = "Phone Nmber";
+            this.PaymentID.Location = new System.Drawing.Point(410, 393);
+            this.PaymentID.Name = "PaymentID";
+            this.PaymentID.Size = new System.Drawing.Size(151, 20);
+            this.PaymentID.TabIndex = 67;
             // 
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(326, 542);
+            this.label32.Location = new System.Drawing.Point(326, 523);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(45, 13);
+            this.label32.Size = new System.Drawing.Size(81, 13);
             this.label32.TabIndex = 64;
-            this.label32.Text = "Address";
+            this.label32.Text = "Payment Status";
             // 
-            // textBox19
+            // paymenttext
             // 
-            this.textBox19.Location = new System.Drawing.Point(409, 535);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(151, 20);
-            this.textBox19.TabIndex = 63;
+            this.paymenttext.Location = new System.Drawing.Point(409, 516);
+            this.paymenttext.Name = "paymenttext";
+            this.paymenttext.Size = new System.Drawing.Size(151, 20);
+            this.paymenttext.TabIndex = 63;
+            this.paymenttext.TextChanged += new System.EventHandler(this.textBox19_TextChanged);
             // 
             // label33
             // 
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(326, 487);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(58, 13);
+            this.label33.Size = new System.Drawing.Size(87, 13);
             this.label33.TabIndex = 62;
-            this.label33.Text = "Last Name";
+            this.label33.Text = "Payment Method";
             // 
             // label34
             // 
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(326, 431);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(57, 13);
+            this.label34.Size = new System.Drawing.Size(47, 13);
             this.label34.TabIndex = 61;
-            this.label34.Text = "First Name";
+            this.label34.Text = "Order ID";
             // 
-            // textBox20
+            // textstatus
             // 
-            this.textBox20.Location = new System.Drawing.Point(409, 631);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(151, 20);
-            this.textBox20.TabIndex = 60;
+            this.textstatus.Location = new System.Drawing.Point(409, 486);
+            this.textstatus.Name = "textstatus";
+            this.textstatus.Size = new System.Drawing.Size(151, 20);
+            this.textstatus.TabIndex = 58;
             // 
-            // textBox21
+            // textorderID
             // 
-            this.textBox21.Location = new System.Drawing.Point(409, 575);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(151, 20);
-            this.textBox21.TabIndex = 59;
-            // 
-            // textBox22
-            // 
-            this.textBox22.Location = new System.Drawing.Point(409, 486);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(151, 20);
-            this.textBox22.TabIndex = 58;
-            // 
-            // textBox23
-            // 
-            this.textBox23.Location = new System.Drawing.Point(409, 430);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(151, 20);
-            this.textBox23.TabIndex = 57;
+            this.textorderID.Location = new System.Drawing.Point(409, 430);
+            this.textorderID.Name = "textorderID";
+            this.textorderID.Size = new System.Drawing.Size(151, 20);
+            this.textorderID.TabIndex = 57;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(485, 669);
+            this.button6.Location = new System.Drawing.Point(485, 576);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 56;
@@ -776,34 +862,57 @@ namespace M1A___Part_3_ALSON
             this.label35.TabIndex = 70;
             this.label35.Text = "Products";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(760, 296);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 71;
+            this.button4.Text = "Insert";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(327, 457);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(74, 13);
+            this.label23.TabIndex = 73;
+            this.label23.Text = "Payment Date";
+            // 
+            // textpaymentdate
+            // 
+            this.textpaymentdate.Location = new System.Drawing.Point(410, 456);
+            this.textpaymentdate.Name = "textpaymentdate";
+            this.textpaymentdate.Size = new System.Drawing.Size(151, 20);
+            this.textpaymentdate.TabIndex = 72;
+            // 
             // MAIN
             // 
             this.ClientSize = new System.Drawing.Size(904, 703);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.textpaymentdate);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label35);
             this.Controls.Add(this.label28);
             this.Controls.Add(this.label29);
-            this.Controls.Add(this.textBox18);
-            this.Controls.Add(this.label30);
-            this.Controls.Add(this.label31);
+            this.Controls.Add(this.PaymentID);
             this.Controls.Add(this.label32);
-            this.Controls.Add(this.textBox19);
+            this.Controls.Add(this.paymenttext);
             this.Controls.Add(this.label33);
             this.Controls.Add(this.label34);
-            this.Controls.Add(this.textBox20);
-            this.Controls.Add(this.textBox21);
-            this.Controls.Add(this.textBox22);
-            this.Controls.Add(this.textBox23);
+            this.Controls.Add(this.textstatus);
+            this.Controls.Add(this.textorderID);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.label23);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.textBox13);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.label27);
-            this.Controls.Add(this.textBox14);
             this.Controls.Add(this.textBox15);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.textBox17);
@@ -815,25 +924,24 @@ namespace M1A___Part_3_ALSON
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox11);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.comboBoxCategory);
+            this.Controls.Add(this.textBoxPrice);
+            this.Controls.Add(this.textBoxProductName);
+            this.Controls.Add(this.textBoxProductID);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBoxOrderDate);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBoxOrderStatus);
+            this.Controls.Add(this.textBoxTotalAmount);
+            this.Controls.Add(this.textBoxOrderCustomerID);
+            this.Controls.Add(this.textBoxOrderID);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -854,11 +962,6 @@ namespace M1A___Part_3_ALSON
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
         {
 
         }
@@ -909,6 +1012,26 @@ namespace M1A___Part_3_ALSON
         }
 
         private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox19_TextChanged(object sender, EventArgs e)
         {
 
         }
