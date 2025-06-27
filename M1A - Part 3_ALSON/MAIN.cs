@@ -18,10 +18,10 @@ namespace M1A___Part_3_ALSON
             button2.Click += button2_Click;
             button3.Click += button3_Click;
             button4.Click += button4_Click;
-            button5.Click += button5_Click;
+            button5.Click += Button5_Click;
             button6.Click += button6_Click;
         }
-
+        // Customer
         private void button2_Click(object sender, EventArgs e)
         {
             string customer = textboxCustomerID.Text.Trim();
@@ -201,23 +201,21 @@ namespace M1A___Part_3_ALSON
             string paymentIDText = PaymentID.Text.Trim();
             string orderIDText = textorderID.Text.Trim();
             string paymentDateText = textpaymentdate.Text.Trim();
-            string paymentMethod = textstatus.Text.Trim(); // Should only be used for method
-            string paymentStatus = paymenttext.Text.Trim();
-            //string amountText = textAmount.Text.Trim();  // This should hold the amount
+            string paymentStatus = paymentstatus.Text.Trim();
+            string paymentMethodText = paymentMethod.Text.Trim();  // renamed for clarity
 
-            // Validate required fields
+            // Validation: Empty fields
             if (string.IsNullOrEmpty(paymentIDText) ||
                 string.IsNullOrEmpty(orderIDText) ||
                 string.IsNullOrEmpty(paymentDateText) ||
                 string.IsNullOrEmpty(paymentStatus) ||
-                string.IsNullOrEmpty(paymentMethod)) 
-                //string.IsNullOrEmpty(amountText))
+                string.IsNullOrEmpty(paymentMethodText))
             {
                 MessageBox.Show("Please fill in all payment fields.");
                 return;
             }
 
-            // Convert numeric fields
+            // Numeric validation
             if (!int.TryParse(paymentIDText, out int paymentID))
             {
                 MessageBox.Show("Payment ID must be a valid number.");
@@ -230,52 +228,99 @@ namespace M1A___Part_3_ALSON
                 return;
             }
 
-            //if (!decimal.TryParse(amountText, out decimal paymentAmount))
-            //{
-            //    MessageBox.Show("Payment amount must be a valid decimal number.");
-            //    return;
-            //}
-
+            // Date validation
             if (!DateTime.TryParse(paymentDateText, out DateTime paymentDate))
             {
                 MessageBox.Show("Payment date must be a valid date.");
                 return;
             }
 
-            // Validate method and status
-            string[] validMethods = { "Cash on Delivery", "Card" };
-            if (!validMethods.Contains(paymentMethod))
+            // Allowed values
+            string[] validMethods = { "Cash", "Credit Card", "Debit Card" };
+            if (!validMethods.Contains(paymentMethodText))
             {
-                MessageBox.Show("Payment method must be either 'Cash on Delivery' or 'Card'.");
+                MessageBox.Show("Payment method must be one of: Cash, Credit Card, or Debit Card.");
                 return;
             }
 
-            string[] validStatuses = { "Processing", "Completed", "Cancelled" };
+            string[] validStatuses = { "Pending", "Completed" };
             if (!validStatuses.Contains(paymentStatus))
             {
-                MessageBox.Show("Payment status must be one of: Processing, Completed, Cancelled.");
+                MessageBox.Show("Payment status must be either 'Pending' or 'Completed'.");
                 return;
             }
 
-            // Perform insertion
+            // Insert into database
             try
             {
-                SQL.InsertPayment(paymentID, orderID, paymentDate, paymentMethod, paymentStatus);
+                SQL.InsertPayment(paymentID, orderID, paymentDate, paymentMethodText, paymentStatus);
                 MessageBox.Show("Payment added successfully!");
 
-                // Clear fields
+                // Clear form
                 PaymentID.Clear();
                 textorderID.Clear();
                 textpaymentdate.Clear();
-                //textAmount.Clear();
-                textstatus.Clear();
-                //paymenttext.Clear();
+                paymentstatus.Clear();
+                paymentMethod.Clear();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+        // OrderItem
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            // Get and trim user input from textboxes
+            string itemIDText = textBoxOrderItemID.Text.Trim();
+            string itemOrderIDText = textBoxOrderItem_OrderID.Text.Trim(); // Changed name
+            string itemProductIDText = textBoxOrderItem_ProductID.Text.Trim(); // Changed name
+            string quantityText = textBoxQuantity.Text.Trim();
+            string priceText = textBoxItemPrice.Text.Trim();
+
+            // Validate that all fields are filled
+            if (string.IsNullOrEmpty(itemIDText) ||
+                string.IsNullOrEmpty(itemOrderIDText) ||
+                string.IsNullOrEmpty(itemProductIDText) ||
+                string.IsNullOrEmpty(quantityText) ||
+                string.IsNullOrEmpty(priceText))
+            {
+                MessageBox.Show("Please fill in all order item fields.");
+                return;
+            }
+
+            // Validate numeric conversions
+            if (!int.TryParse(itemIDText, out int orderItemID) ||
+                !int.TryParse(itemOrderIDText, out int orderID) ||
+                !int.TryParse(itemProductIDText, out int productID) ||
+                !int.TryParse(quantityText, out int quantity) ||
+                !decimal.TryParse(priceText, out decimal itemPrice))
+            {
+                MessageBox.Show("Please enter valid numeric values.");
+                return;
+            }
+
+            try
+            {
+                // Call your database method
+                SQL.InsertOrderItem(orderItemID, orderID, productID, quantity, itemPrice);
+                MessageBox.Show("Order item added successfully!");
+
+                // Clear fields
+                textBoxOrderItemID.Clear();
+                textBoxOrderItem_OrderID.Clear();
+                textBoxOrderItem_ProductID.Clear();
+                textBoxQuantity.Clear();
+                textBoxItemPrice.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
+
 
 
 
@@ -326,24 +371,24 @@ namespace M1A___Part_3_ALSON
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBoxOrderItemID = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBoxQuantity = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.textBoxItemPrice = new System.Windows.Forms.TextBox();
+            this.textBoxOrderItem_ProductID = new System.Windows.Forms.TextBox();
+            this.textBoxOrderItem_OrderID = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.PaymentID = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
-            this.paymenttext = new System.Windows.Forms.TextBox();
+            this.paymentstatus = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.textstatus = new System.Windows.Forms.TextBox();
+            this.paymentMethod = new System.Windows.Forms.TextBox();
             this.textorderID = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.label35 = new System.Windows.Forms.Label();
@@ -689,12 +734,12 @@ namespace M1A___Part_3_ALSON
             this.label22.TabIndex = 54;
             this.label22.Text = "Order Item ID";
             // 
-            // textBox12
+            // textBoxOrderItemID
             // 
-            this.textBox12.Location = new System.Drawing.Point(148, 392);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(151, 20);
-            this.textBox12.TabIndex = 53;
+            this.textBoxOrderItemID.Location = new System.Drawing.Point(148, 392);
+            this.textBoxOrderItemID.Name = "textBoxOrderItemID";
+            this.textBoxOrderItemID.Size = new System.Drawing.Size(151, 20);
+            this.textBoxOrderItemID.TabIndex = 53;
             // 
             // label24
             // 
@@ -714,12 +759,12 @@ namespace M1A___Part_3_ALSON
             this.label25.TabIndex = 50;
             this.label25.Text = "Quantity";
             // 
-            // textBox13
+            // textBoxQuantity
             // 
-            this.textBox13.Location = new System.Drawing.Point(147, 534);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(151, 20);
-            this.textBox13.TabIndex = 49;
+            this.textBoxQuantity.Location = new System.Drawing.Point(147, 534);
+            this.textBoxQuantity.Name = "textBoxQuantity";
+            this.textBoxQuantity.Size = new System.Drawing.Size(151, 20);
+            this.textBoxQuantity.TabIndex = 49;
             // 
             // label26
             // 
@@ -739,26 +784,26 @@ namespace M1A___Part_3_ALSON
             this.label27.TabIndex = 47;
             this.label27.Text = "Order ID";
             // 
-            // textBox15
+            // textBoxItemPrice
             // 
-            this.textBox15.Location = new System.Drawing.Point(147, 574);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(151, 20);
-            this.textBox15.TabIndex = 45;
+            this.textBoxItemPrice.Location = new System.Drawing.Point(147, 574);
+            this.textBoxItemPrice.Name = "textBoxItemPrice";
+            this.textBoxItemPrice.Size = new System.Drawing.Size(151, 20);
+            this.textBoxItemPrice.TabIndex = 45;
             // 
-            // textBox16
+            // textBoxOrderItem_ProductID
             // 
-            this.textBox16.Location = new System.Drawing.Point(147, 485);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(151, 20);
-            this.textBox16.TabIndex = 44;
+            this.textBoxOrderItem_ProductID.Location = new System.Drawing.Point(147, 485);
+            this.textBoxOrderItem_ProductID.Name = "textBoxOrderItem_ProductID";
+            this.textBoxOrderItem_ProductID.Size = new System.Drawing.Size(151, 20);
+            this.textBoxOrderItem_ProductID.TabIndex = 44;
             // 
-            // textBox17
+            // textBoxOrderItem_OrderID
             // 
-            this.textBox17.Location = new System.Drawing.Point(147, 429);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(151, 20);
-            this.textBox17.TabIndex = 43;
+            this.textBoxOrderItem_OrderID.Location = new System.Drawing.Point(147, 429);
+            this.textBoxOrderItem_OrderID.Name = "textBoxOrderItem_OrderID";
+            this.textBoxOrderItem_OrderID.Size = new System.Drawing.Size(151, 20);
+            this.textBoxOrderItem_OrderID.TabIndex = 43;
             // 
             // button5
             // 
@@ -804,13 +849,13 @@ namespace M1A___Part_3_ALSON
             this.label32.TabIndex = 64;
             this.label32.Text = "Payment Status";
             // 
-            // paymenttext
+            // paymentstatus
             // 
-            this.paymenttext.Location = new System.Drawing.Point(409, 516);
-            this.paymenttext.Name = "paymenttext";
-            this.paymenttext.Size = new System.Drawing.Size(151, 20);
-            this.paymenttext.TabIndex = 63;
-            this.paymenttext.TextChanged += new System.EventHandler(this.textBox19_TextChanged);
+            this.paymentstatus.Location = new System.Drawing.Point(409, 516);
+            this.paymentstatus.Name = "paymentstatus";
+            this.paymentstatus.Size = new System.Drawing.Size(151, 20);
+            this.paymentstatus.TabIndex = 63;
+            this.paymentstatus.TextChanged += new System.EventHandler(this.textBox19_TextChanged);
             // 
             // label33
             // 
@@ -830,12 +875,12 @@ namespace M1A___Part_3_ALSON
             this.label34.TabIndex = 61;
             this.label34.Text = "Order ID";
             // 
-            // textstatus
+            // paymentMethod
             // 
-            this.textstatus.Location = new System.Drawing.Point(409, 486);
-            this.textstatus.Name = "textstatus";
-            this.textstatus.Size = new System.Drawing.Size(151, 20);
-            this.textstatus.TabIndex = 58;
+            this.paymentMethod.Location = new System.Drawing.Point(409, 486);
+            this.paymentMethod.Name = "paymentMethod";
+            this.paymentMethod.Size = new System.Drawing.Size(151, 20);
+            this.paymentMethod.TabIndex = 58;
             // 
             // textorderID
             // 
@@ -899,23 +944,23 @@ namespace M1A___Part_3_ALSON
             this.Controls.Add(this.label29);
             this.Controls.Add(this.PaymentID);
             this.Controls.Add(this.label32);
-            this.Controls.Add(this.paymenttext);
+            this.Controls.Add(this.paymentstatus);
             this.Controls.Add(this.label33);
             this.Controls.Add(this.label34);
-            this.Controls.Add(this.textstatus);
+            this.Controls.Add(this.paymentMethod);
             this.Controls.Add(this.textorderID);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.textBox12);
+            this.Controls.Add(this.textBoxOrderItemID);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label25);
-            this.Controls.Add(this.textBox13);
+            this.Controls.Add(this.textBoxQuantity);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.label27);
-            this.Controls.Add(this.textBox15);
-            this.Controls.Add(this.textBox16);
-            this.Controls.Add(this.textBox17);
+            this.Controls.Add(this.textBoxItemPrice);
+            this.Controls.Add(this.textBoxOrderItem_ProductID);
+            this.Controls.Add(this.textBoxOrderItem_OrderID);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);

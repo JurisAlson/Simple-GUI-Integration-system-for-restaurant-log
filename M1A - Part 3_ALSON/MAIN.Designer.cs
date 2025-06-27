@@ -63,29 +63,29 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBoxOrderItemID;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBoxQuantity;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.TextBox textBoxItemPrice;
+        private System.Windows.Forms.TextBox textBoxOrderItem_ProductID;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox PaymentID;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox paymenttext;
+        private System.Windows.Forms.TextBox paymentstatus;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox textstatus;
+        private System.Windows.Forms.TextBox paymentMethod;
         private System.Windows.Forms.TextBox textorderID;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textpaymentdate;
+        public System.Windows.Forms.TextBox textBoxOrderItem_OrderID;
     }
 }
