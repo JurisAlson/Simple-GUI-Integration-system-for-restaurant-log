@@ -20,6 +20,8 @@ namespace M1A___Part_3_ALSON
             button4.Click += button4_Click;
             button5.Click += Button5_Click;
             button6.Click += button6_Click;
+            button7.Click += button7_Click;
+            button10.Click += button10_Click;
         }
         // Customer
         private void button2_Click(object sender, EventArgs e)
@@ -193,6 +195,8 @@ namespace M1A___Part_3_ALSON
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+
         }
 
         //Payment
@@ -319,6 +323,27 @@ namespace M1A___Part_3_ALSON
             }
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string message;
+            if (SQL.TestConnection(out message))
+            {
+                var deleteForm = new DELETION();
+                deleteForm.Show();   // ✅ Show the new form
+                this.Hide();         // Optional
+            }
+            else
+            {
+                MessageBox.Show(message, "Error");
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
 
 
 
@@ -395,11 +420,15 @@ namespace M1A___Part_3_ALSON
             this.button4 = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.textpaymentdate = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(223, 337);
+            this.button2.Location = new System.Drawing.Point(224, 310);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 0;
@@ -423,7 +452,7 @@ namespace M1A___Part_3_ALSON
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(147, 299);
+            this.textBoxEmail.Location = new System.Drawing.Point(148, 284);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(151, 20);
             this.textBoxEmail.TabIndex = 6;
@@ -448,7 +477,7 @@ namespace M1A___Part_3_ALSON
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(416, 165);
+            this.label2.Location = new System.Drawing.Point(424, 165);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 9;
@@ -494,7 +523,7 @@ namespace M1A___Part_3_ALSON
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(64, 302);
+            this.label6.Location = new System.Drawing.Point(65, 287);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 14;
@@ -504,7 +533,7 @@ namespace M1A___Part_3_ALSON
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(322, 246);
+            this.label7.Location = new System.Drawing.Point(330, 246);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 13);
             this.label7.TabIndex = 25;
@@ -513,7 +542,7 @@ namespace M1A___Part_3_ALSON
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(322, 210);
+            this.label8.Location = new System.Drawing.Point(330, 210);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 13);
             this.label8.TabIndex = 24;
@@ -522,7 +551,7 @@ namespace M1A___Part_3_ALSON
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(322, 155);
+            this.label9.Location = new System.Drawing.Point(330, 155);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 13);
             this.label9.TabIndex = 23;
@@ -530,7 +559,7 @@ namespace M1A___Part_3_ALSON
             // 
             // textBoxOrderDate
             // 
-            this.textBoxOrderDate.Location = new System.Drawing.Point(405, 148);
+            this.textBoxOrderDate.Location = new System.Drawing.Point(413, 148);
             this.textBoxOrderDate.Name = "textBoxOrderDate";
             this.textBoxOrderDate.Size = new System.Drawing.Size(151, 20);
             this.textBoxOrderDate.TabIndex = 22;
@@ -538,7 +567,7 @@ namespace M1A___Part_3_ALSON
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(322, 106);
+            this.label10.Location = new System.Drawing.Point(330, 106);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 13);
             this.label10.TabIndex = 21;
@@ -547,7 +576,7 @@ namespace M1A___Part_3_ALSON
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(327, 68);
+            this.label11.Location = new System.Drawing.Point(335, 68);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(47, 13);
             this.label11.TabIndex = 20;
@@ -555,35 +584,35 @@ namespace M1A___Part_3_ALSON
             // 
             // textBoxOrderStatus
             // 
-            this.textBoxOrderStatus.Location = new System.Drawing.Point(405, 243);
+            this.textBoxOrderStatus.Location = new System.Drawing.Point(413, 243);
             this.textBoxOrderStatus.Name = "textBoxOrderStatus";
             this.textBoxOrderStatus.Size = new System.Drawing.Size(151, 20);
             this.textBoxOrderStatus.TabIndex = 19;
             // 
             // textBoxTotalAmount
             // 
-            this.textBoxTotalAmount.Location = new System.Drawing.Point(405, 203);
+            this.textBoxTotalAmount.Location = new System.Drawing.Point(413, 203);
             this.textBoxTotalAmount.Name = "textBoxTotalAmount";
             this.textBoxTotalAmount.Size = new System.Drawing.Size(151, 20);
             this.textBoxTotalAmount.TabIndex = 18;
             // 
             // textBoxOrderCustomerID
             // 
-            this.textBoxOrderCustomerID.Location = new System.Drawing.Point(405, 105);
+            this.textBoxOrderCustomerID.Location = new System.Drawing.Point(413, 105);
             this.textBoxOrderCustomerID.Name = "textBoxOrderCustomerID";
             this.textBoxOrderCustomerID.Size = new System.Drawing.Size(151, 20);
             this.textBoxOrderCustomerID.TabIndex = 17;
             // 
             // textBoxOrderID
             // 
-            this.textBoxOrderID.Location = new System.Drawing.Point(410, 67);
+            this.textBoxOrderID.Location = new System.Drawing.Point(418, 67);
             this.textBoxOrderID.Name = "textBoxOrderID";
             this.textBoxOrderID.Size = new System.Drawing.Size(151, 20);
             this.textBoxOrderID.TabIndex = 16;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(481, 297);
+            this.button3.Location = new System.Drawing.Point(489, 269);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 15;
@@ -594,7 +623,7 @@ namespace M1A___Part_3_ALSON
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(601, 264);
+            this.label12.Location = new System.Drawing.Point(605, 250);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(49, 13);
             this.label12.TabIndex = 37;
@@ -603,7 +632,7 @@ namespace M1A___Part_3_ALSON
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(601, 212);
+            this.label13.Location = new System.Drawing.Point(605, 210);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(31, 13);
             this.label13.TabIndex = 36;
@@ -612,7 +641,7 @@ namespace M1A___Part_3_ALSON
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(601, 172);
+            this.label14.Location = new System.Drawing.Point(605, 155);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(60, 13);
             this.label14.TabIndex = 35;
@@ -620,7 +649,7 @@ namespace M1A___Part_3_ALSON
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(684, 165);
+            this.textBoxDescription.Location = new System.Drawing.Point(688, 152);
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(151, 20);
             this.textBoxDescription.TabIndex = 34;
@@ -628,7 +657,7 @@ namespace M1A___Part_3_ALSON
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(601, 117);
+            this.label15.Location = new System.Drawing.Point(605, 105);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(75, 13);
             this.label15.TabIndex = 33;
@@ -637,7 +666,7 @@ namespace M1A___Part_3_ALSON
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(601, 61);
+            this.label16.Location = new System.Drawing.Point(605, 62);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(58, 13);
             this.label16.TabIndex = 32;
@@ -645,28 +674,28 @@ namespace M1A___Part_3_ALSON
             // 
             // comboBoxCategory
             // 
-            this.comboBoxCategory.Location = new System.Drawing.Point(684, 261);
+            this.comboBoxCategory.Location = new System.Drawing.Point(688, 246);
             this.comboBoxCategory.Name = "comboBoxCategory";
             this.comboBoxCategory.Size = new System.Drawing.Size(151, 20);
             this.comboBoxCategory.TabIndex = 31;
             // 
             // textBoxPrice
             // 
-            this.textBoxPrice.Location = new System.Drawing.Point(684, 205);
+            this.textBoxPrice.Location = new System.Drawing.Point(688, 202);
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(151, 20);
             this.textBoxPrice.TabIndex = 30;
             // 
             // textBoxProductName
             // 
-            this.textBoxProductName.Location = new System.Drawing.Point(684, 116);
+            this.textBoxProductName.Location = new System.Drawing.Point(688, 103);
             this.textBoxProductName.Name = "textBoxProductName";
             this.textBoxProductName.Size = new System.Drawing.Size(151, 20);
             this.textBoxProductName.TabIndex = 29;
             // 
             // textBoxProductID
             // 
-            this.textBoxProductID.Location = new System.Drawing.Point(684, 60);
+            this.textBoxProductID.Location = new System.Drawing.Point(688, 60);
             this.textBoxProductID.Name = "textBoxProductID";
             this.textBoxProductID.Size = new System.Drawing.Size(151, 20);
             this.textBoxProductID.TabIndex = 28;
@@ -674,7 +703,7 @@ namespace M1A___Part_3_ALSON
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(693, 185);
+            this.label17.Location = new System.Drawing.Point(697, 167);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(0, 13);
             this.label17.TabIndex = 26;
@@ -710,7 +739,7 @@ namespace M1A___Part_3_ALSON
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(327, 30);
+            this.label20.Location = new System.Drawing.Point(335, 30);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(38, 13);
             this.label20.TabIndex = 41;
@@ -719,7 +748,7 @@ namespace M1A___Part_3_ALSON
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(65, 361);
+            this.label21.Location = new System.Drawing.Point(66, 373);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(56, 13);
             this.label21.TabIndex = 55;
@@ -728,7 +757,7 @@ namespace M1A___Part_3_ALSON
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(65, 393);
+            this.label22.Location = new System.Drawing.Point(66, 405);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(70, 13);
             this.label22.TabIndex = 54;
@@ -736,7 +765,7 @@ namespace M1A___Part_3_ALSON
             // 
             // textBoxOrderItemID
             // 
-            this.textBoxOrderItemID.Location = new System.Drawing.Point(148, 392);
+            this.textBoxOrderItemID.Location = new System.Drawing.Point(149, 404);
             this.textBoxOrderItemID.Name = "textBoxOrderItemID";
             this.textBoxOrderItemID.Size = new System.Drawing.Size(151, 20);
             this.textBoxOrderItemID.TabIndex = 53;
@@ -744,7 +773,7 @@ namespace M1A___Part_3_ALSON
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(64, 581);
+            this.label24.Location = new System.Drawing.Point(66, 583);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(41, 13);
             this.label24.TabIndex = 51;
@@ -753,7 +782,7 @@ namespace M1A___Part_3_ALSON
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(64, 541);
+            this.label25.Location = new System.Drawing.Point(66, 543);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(46, 13);
             this.label25.TabIndex = 50;
@@ -761,7 +790,7 @@ namespace M1A___Part_3_ALSON
             // 
             // textBoxQuantity
             // 
-            this.textBoxQuantity.Location = new System.Drawing.Point(147, 534);
+            this.textBoxQuantity.Location = new System.Drawing.Point(149, 536);
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(151, 20);
             this.textBoxQuantity.TabIndex = 49;
@@ -769,7 +798,7 @@ namespace M1A___Part_3_ALSON
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(64, 486);
+            this.label26.Location = new System.Drawing.Point(66, 489);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(58, 13);
             this.label26.TabIndex = 48;
@@ -778,7 +807,7 @@ namespace M1A___Part_3_ALSON
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(64, 430);
+            this.label27.Location = new System.Drawing.Point(65, 442);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(47, 13);
             this.label27.TabIndex = 47;
@@ -786,28 +815,28 @@ namespace M1A___Part_3_ALSON
             // 
             // textBoxItemPrice
             // 
-            this.textBoxItemPrice.Location = new System.Drawing.Point(147, 574);
+            this.textBoxItemPrice.Location = new System.Drawing.Point(149, 576);
             this.textBoxItemPrice.Name = "textBoxItemPrice";
             this.textBoxItemPrice.Size = new System.Drawing.Size(151, 20);
             this.textBoxItemPrice.TabIndex = 45;
             // 
             // textBoxOrderItem_ProductID
             // 
-            this.textBoxOrderItem_ProductID.Location = new System.Drawing.Point(147, 485);
+            this.textBoxOrderItem_ProductID.Location = new System.Drawing.Point(149, 488);
             this.textBoxOrderItem_ProductID.Name = "textBoxOrderItem_ProductID";
             this.textBoxOrderItem_ProductID.Size = new System.Drawing.Size(151, 20);
             this.textBoxOrderItem_ProductID.TabIndex = 44;
             // 
             // textBoxOrderItem_OrderID
             // 
-            this.textBoxOrderItem_OrderID.Location = new System.Drawing.Point(147, 429);
+            this.textBoxOrderItem_OrderID.Location = new System.Drawing.Point(148, 441);
             this.textBoxOrderItem_OrderID.Name = "textBoxOrderItem_OrderID";
             this.textBoxOrderItem_OrderID.Size = new System.Drawing.Size(151, 20);
             this.textBoxOrderItem_OrderID.TabIndex = 43;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(224, 609);
+            this.button5.Location = new System.Drawing.Point(224, 602);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 42;
@@ -818,7 +847,7 @@ namespace M1A___Part_3_ALSON
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(327, 362);
+            this.label28.Location = new System.Drawing.Point(335, 373);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(48, 13);
             this.label28.TabIndex = 69;
@@ -827,7 +856,7 @@ namespace M1A___Part_3_ALSON
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(327, 394);
+            this.label29.Location = new System.Drawing.Point(338, 405);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(62, 13);
             this.label29.TabIndex = 68;
@@ -835,7 +864,7 @@ namespace M1A___Part_3_ALSON
             // 
             // PaymentID
             // 
-            this.PaymentID.Location = new System.Drawing.Point(410, 393);
+            this.PaymentID.Location = new System.Drawing.Point(432, 402);
             this.PaymentID.Name = "PaymentID";
             this.PaymentID.Size = new System.Drawing.Size(151, 20);
             this.PaymentID.TabIndex = 67;
@@ -843,7 +872,7 @@ namespace M1A___Part_3_ALSON
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(326, 523);
+            this.label32.Location = new System.Drawing.Point(336, 583);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(81, 13);
             this.label32.TabIndex = 64;
@@ -851,7 +880,7 @@ namespace M1A___Part_3_ALSON
             // 
             // paymentstatus
             // 
-            this.paymentstatus.Location = new System.Drawing.Point(409, 516);
+            this.paymentstatus.Location = new System.Drawing.Point(432, 576);
             this.paymentstatus.Name = "paymentstatus";
             this.paymentstatus.Size = new System.Drawing.Size(151, 20);
             this.paymentstatus.TabIndex = 63;
@@ -860,16 +889,17 @@ namespace M1A___Part_3_ALSON
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(326, 487);
+            this.label33.Location = new System.Drawing.Point(336, 543);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(87, 13);
             this.label33.TabIndex = 62;
             this.label33.Text = "Payment Method";
+            this.label33.Click += new System.EventHandler(this.label33_Click);
             // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(326, 431);
+            this.label34.Location = new System.Drawing.Point(338, 442);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(47, 13);
             this.label34.TabIndex = 61;
@@ -877,21 +907,21 @@ namespace M1A___Part_3_ALSON
             // 
             // paymentMethod
             // 
-            this.paymentMethod.Location = new System.Drawing.Point(409, 486);
+            this.paymentMethod.Location = new System.Drawing.Point(432, 543);
             this.paymentMethod.Name = "paymentMethod";
             this.paymentMethod.Size = new System.Drawing.Size(151, 20);
             this.paymentMethod.TabIndex = 58;
             // 
             // textorderID
             // 
-            this.textorderID.Location = new System.Drawing.Point(409, 430);
+            this.textorderID.Location = new System.Drawing.Point(432, 439);
             this.textorderID.Name = "textorderID";
             this.textorderID.Size = new System.Drawing.Size(151, 20);
             this.textorderID.TabIndex = 57;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(485, 576);
+            this.button6.Location = new System.Drawing.Point(508, 602);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 56;
@@ -901,7 +931,7 @@ namespace M1A___Part_3_ALSON
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(620, 30);
+            this.label35.Location = new System.Drawing.Point(605, 30);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(49, 13);
             this.label35.TabIndex = 70;
@@ -909,7 +939,7 @@ namespace M1A___Part_3_ALSON
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(760, 296);
+            this.button4.Location = new System.Drawing.Point(764, 272);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 71;
@@ -920,7 +950,7 @@ namespace M1A___Part_3_ALSON
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(327, 457);
+            this.label23.Location = new System.Drawing.Point(336, 489);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(74, 13);
             this.label23.TabIndex = 73;
@@ -928,14 +958,54 @@ namespace M1A___Part_3_ALSON
             // 
             // textpaymentdate
             // 
-            this.textpaymentdate.Location = new System.Drawing.Point(410, 456);
+            this.textpaymentdate.Location = new System.Drawing.Point(432, 486);
             this.textpaymentdate.Name = "textpaymentdate";
             this.textpaymentdate.Size = new System.Drawing.Size(151, 20);
             this.textpaymentdate.TabIndex = 72;
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(713, 405);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(126, 23);
+            this.button7.TabIndex = 74;
+            this.button7.Text = "DELETE";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(713, 454);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(126, 23);
+            this.button8.TabIndex = 75;
+            this.button8.Text = "READ";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(713, 504);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(126, 23);
+            this.button9.TabIndex = 76;
+            this.button9.Text = "UPDATE";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(713, 545);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(126, 23);
+            this.button10.TabIndex = 77;
+            this.button10.Text = "EXIT";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
             // MAIN
             // 
             this.ClientSize = new System.Drawing.Size(904, 703);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.textpaymentdate);
             this.Controls.Add(this.button4);
@@ -1026,10 +1096,6 @@ namespace M1A___Part_3_ALSON
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void label4_Click(object sender, EventArgs e)
         {
@@ -1061,11 +1127,6 @@ namespace M1A___Part_3_ALSON
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click_1(object sender, EventArgs e)
         {
 
@@ -1077,6 +1138,11 @@ namespace M1A___Part_3_ALSON
         }
 
         private void textBox19_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label33_Click(object sender, EventArgs e)
         {
 
         }

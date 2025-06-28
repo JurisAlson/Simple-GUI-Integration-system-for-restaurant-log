@@ -128,7 +128,33 @@ namespace M1A___Part_3_ALSON
 
 
 
-
+        //DELETION
+        public static void DeleteCustomer(int customerId)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "DELETE FROM Customer WHERE CustomerID = :customerID", conn))
+                {
+                    cmd.Parameters.Add(":customerID", OracleDbType.Int32).Value = customerId;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public static void DeleteOrder(int orderId)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "DELETE FROM Orders2 WHERE OrderID = :OrderID", conn)) 
+                {
+                    cmd.Parameters.Add(":OrderID", OracleDbType.Int32).Value = orderId;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }

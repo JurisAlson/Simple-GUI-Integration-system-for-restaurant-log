@@ -83,6 +83,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DELETION.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DELETION.Designer.cs">
+      <DependentUpon>DELETION.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,8 +103,22 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="READcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="READcs.Designer.cs">
+      <DependentUpon>READcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQL.cs" />
-    <Compile Include="SQLDelete.cs" />
+    <Compile Include="UPDATE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UPDATE.Designer.cs">
+      <DependentUpon>UPDATE.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DELETION.resx">
+      <DependentUpon>DELETION.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
