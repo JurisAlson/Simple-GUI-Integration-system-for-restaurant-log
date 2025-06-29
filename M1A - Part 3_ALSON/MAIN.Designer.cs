@@ -88,7 +88,7 @@
         private System.Windows.Forms.TextBox textpaymentdate;
         public System.Windows.Forms.TextBox textBoxOrderItem_OrderID;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button READ;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
     }

@@ -156,5 +156,127 @@ namespace M1A___Part_3_ALSON
             }
         }
 
+        public static void DeleteProduct(int orderId)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "DELETE FROM Product WHERE ProductID = :ProductID", conn))
+                {
+                    cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = orderId;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void DeleteOrderItem(int OrderItemID)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "DELETE FROM OrderItem WHERE OrderItemID = :OrderItemID", conn))
+                {
+                    cmd.Parameters.Add(":OrderItemID", OracleDbType.Int32).Value = OrderItemID;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void DeletePayment(int OrderItemID)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "DELETE FROM Payment WHERE PaymentID = :PaymentID", conn))
+                {
+                    cmd.Parameters.Add(":PaymentID", OracleDbType.Int32).Value = OrderItemID;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+
+        public static DataTable RetrieveAllCustomers()
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand("SELECT * FROM Customer", conn))
+                using (OracleDataAdapter adapter = new OracleDataAdapter(cmd))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+                    return table;
+                }
+            }
+        }
+
+        public static DataTable RetrieveAllProducts()
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand("SELECT * FROM Product", conn))
+                using (OracleDataAdapter adapter = new OracleDataAdapter(cmd))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+                    return table;
+                }
+            }
+        }
+
+        public static DataTable RetrieveAllOrders()
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand("SELECT * FROM Orders2", conn))
+                using (OracleDataAdapter adapter = new OracleDataAdapter(cmd))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+                    return table;
+                }
+            }
+        }
+
+        public static DataTable RetrieveAllOrderItem()
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand("SELECT * FROM OrderItem", conn))
+                using (OracleDataAdapter adapter = new OracleDataAdapter(cmd))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+                    return table;
+                }
+            }
+        }
+
+        public static DataTable RetrieveAllPayment()
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand("SELECT * FROM Payment", conn))
+                using (OracleDataAdapter adapter = new OracleDataAdapter(cmd))
+                {
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+                    return table;
+                }
+            }
+        }   
+
+
     }
 }
+

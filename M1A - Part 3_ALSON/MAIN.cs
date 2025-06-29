@@ -20,8 +20,11 @@ namespace M1A___Part_3_ALSON
             button4.Click += button4_Click;
             button5.Click += Button5_Click;
             button6.Click += button6_Click;
+
             button7.Click += button7_Click;
+            button9.Click += UPDATE_CLICK;
             button10.Click += button10_Click;
+            READ.Click += READ_Click;
         }
         // Customer
         private void button2_Click(object sender, EventArgs e)
@@ -337,6 +340,36 @@ namespace M1A___Part_3_ALSON
                 MessageBox.Show(message, "Error");
             }
         }
+        private void READ_Click(object sender, EventArgs e)
+        {
+            string message;
+            if (SQL.TestConnection(out message))
+            {
+                var RetriveForm = new Retrieve();
+                RetriveForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show(message, "Error");
+            }
+
+        }
+        private void UPDATE_CLICK(Object sender, EventArgs e)
+        {
+            string message;
+            if (SQL.TestConnection(out message))
+            {
+                var RetriveForm = new UPDATE();
+                RetriveForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show(message, "Error");
+            }
+
+        }
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -421,7 +454,7 @@ namespace M1A___Part_3_ALSON
             this.label23 = new System.Windows.Forms.Label();
             this.textpaymentdate = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.READ = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -965,25 +998,25 @@ namespace M1A___Part_3_ALSON
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(713, 405);
+            this.button7.Location = new System.Drawing.Point(608, 402);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(126, 23);
             this.button7.TabIndex = 74;
             this.button7.Text = "DELETE";
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // READ
             // 
-            this.button8.Location = new System.Drawing.Point(713, 454);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(126, 23);
-            this.button8.TabIndex = 75;
-            this.button8.Text = "READ";
-            this.button8.UseVisualStyleBackColor = true;
+            this.READ.Location = new System.Drawing.Point(608, 451);
+            this.READ.Name = "READ";
+            this.READ.Size = new System.Drawing.Size(126, 23);
+            this.READ.TabIndex = 75;
+            this.READ.Text = "READ";
+            this.READ.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(713, 504);
+            this.button9.Location = new System.Drawing.Point(608, 501);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(126, 23);
             this.button9.TabIndex = 76;
@@ -992,7 +1025,7 @@ namespace M1A___Part_3_ALSON
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(713, 545);
+            this.button10.Location = new System.Drawing.Point(608, 542);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(126, 23);
             this.button10.TabIndex = 77;
@@ -1004,7 +1037,7 @@ namespace M1A___Part_3_ALSON
             this.ClientSize = new System.Drawing.Size(904, 703);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
+            this.Controls.Add(this.READ);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.textpaymentdate);

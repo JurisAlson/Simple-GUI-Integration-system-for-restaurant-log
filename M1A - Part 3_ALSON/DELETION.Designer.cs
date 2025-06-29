@@ -30,11 +30,10 @@
         {
             this.CustomerDELETE = new System.Windows.Forms.Button();
             this.CustomertextBox = new System.Windows.Forms.TextBox();
-            this.EXIT = new System.Windows.Forms.Button();
-            this.BACK = new System.Windows.Forms.Button();
+            this.INSERT = new System.Windows.Forms.Button();
             this.ORDERtextBox = new System.Windows.Forms.TextBox();
             this.orderIDDELETE = new System.Windows.Forms.Button();
-            this.PRODUCTIDtextBox = new System.Windows.Forms.TextBox();
+            this.ProductIDDELETEButton = new System.Windows.Forms.TextBox();
             this.productIDDELETE = new System.Windows.Forms.Button();
             this.ORDERITEMIDtextBox = new System.Windows.Forms.TextBox();
             this.orderitemIDDELETE = new System.Windows.Forms.Button();
@@ -45,6 +44,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.EXIT = new System.Windows.Forms.Button();
+            this.UPDATE = new System.Windows.Forms.Button();
+            this.READ = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CustomerDELETE
@@ -63,23 +65,14 @@
             this.CustomertextBox.Size = new System.Drawing.Size(100, 20);
             this.CustomertextBox.TabIndex = 1;
             // 
-            // EXIT
+            // INSERT
             // 
-            this.EXIT.Location = new System.Drawing.Point(892, 433);
-            this.EXIT.Name = "EXIT";
-            this.EXIT.Size = new System.Drawing.Size(75, 23);
-            this.EXIT.TabIndex = 2;
-            this.EXIT.Text = "EXIT";
-            this.EXIT.UseVisualStyleBackColor = true;
-            // 
-            // BACK
-            // 
-            this.BACK.Location = new System.Drawing.Point(33, 12);
-            this.BACK.Name = "BACK";
-            this.BACK.Size = new System.Drawing.Size(75, 23);
-            this.BACK.TabIndex = 3;
-            this.BACK.Text = "BACK";
-            this.BACK.UseVisualStyleBackColor = true;
+            this.INSERT.Location = new System.Drawing.Point(404, 81);
+            this.INSERT.Name = "INSERT";
+            this.INSERT.Size = new System.Drawing.Size(126, 23);
+            this.INSERT.TabIndex = 2;
+            this.INSERT.Text = "INSERT";
+            this.INSERT.UseVisualStyleBackColor = true;
             // 
             // ORDERtextBox
             // 
@@ -97,12 +90,12 @@
             this.orderIDDELETE.Text = "DELETE";
             this.orderIDDELETE.UseVisualStyleBackColor = true;
             // 
-            // PRODUCTIDtextBox
+            // ProductIDDELETEButton
             // 
-            this.PRODUCTIDtextBox.Location = new System.Drawing.Point(138, 183);
-            this.PRODUCTIDtextBox.Name = "PRODUCTIDtextBox";
-            this.PRODUCTIDtextBox.Size = new System.Drawing.Size(100, 20);
-            this.PRODUCTIDtextBox.TabIndex = 7;
+            this.ProductIDDELETEButton.Location = new System.Drawing.Point(138, 183);
+            this.ProductIDDELETEButton.Name = "ProductIDDELETEButton";
+            this.ProductIDDELETEButton.Size = new System.Drawing.Size(100, 20);
+            this.ProductIDDELETEButton.TabIndex = 7;
             // 
             // productIDDELETE
             // 
@@ -190,9 +183,39 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Payment ID";
             // 
+            // EXIT
+            // 
+            this.EXIT.Location = new System.Drawing.Point(404, 214);
+            this.EXIT.Name = "EXIT";
+            this.EXIT.Size = new System.Drawing.Size(126, 23);
+            this.EXIT.TabIndex = 80;
+            this.EXIT.Text = "EXIT";
+            this.EXIT.UseVisualStyleBackColor = true;
+            // 
+            // UPDATE
+            // 
+            this.UPDATE.Location = new System.Drawing.Point(404, 174);
+            this.UPDATE.Name = "UPDATE";
+            this.UPDATE.Size = new System.Drawing.Size(126, 23);
+            this.UPDATE.TabIndex = 79;
+            this.UPDATE.Text = "UPDATE";
+            this.UPDATE.UseVisualStyleBackColor = true;
+            // 
+            // READ
+            // 
+            this.READ.Location = new System.Drawing.Point(404, 127);
+            this.READ.Name = "READ";
+            this.READ.Size = new System.Drawing.Size(126, 23);
+            this.READ.TabIndex = 82;
+            this.READ.Text = "READ";
+            this.READ.UseVisualStyleBackColor = true;
+            // 
             // DELETION
             // 
             this.ClientSize = new System.Drawing.Size(1042, 567);
+            this.Controls.Add(this.READ);
+            this.Controls.Add(this.EXIT);
+            this.Controls.Add(this.UPDATE);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -202,12 +225,11 @@
             this.Controls.Add(this.paymentIDDELETE);
             this.Controls.Add(this.ORDERITEMIDtextBox);
             this.Controls.Add(this.orderitemIDDELETE);
-            this.Controls.Add(this.PRODUCTIDtextBox);
+            this.Controls.Add(this.ProductIDDELETEButton);
             this.Controls.Add(this.productIDDELETE);
             this.Controls.Add(this.ORDERtextBox);
             this.Controls.Add(this.orderIDDELETE);
-            this.Controls.Add(this.BACK);
-            this.Controls.Add(this.EXIT);
+            this.Controls.Add(this.INSERT);
             this.Controls.Add(this.CustomertextBox);
             this.Controls.Add(this.CustomerDELETE);
             this.Name = "DELETION";
@@ -220,11 +242,10 @@
 
         private System.Windows.Forms.Button CustomerDELETE;
         private System.Windows.Forms.TextBox CustomertextBox;
-        private System.Windows.Forms.Button EXIT;
-        private System.Windows.Forms.Button BACK;
+        private System.Windows.Forms.Button INSERT;
         private System.Windows.Forms.TextBox ORDERtextBox;
         private System.Windows.Forms.Button orderIDDELETE;
-        private System.Windows.Forms.TextBox PRODUCTIDtextBox;
+        private System.Windows.Forms.TextBox ProductIDDELETEButton;
         private System.Windows.Forms.Button productIDDELETE;
         private System.Windows.Forms.TextBox ORDERITEMIDtextBox;
         private System.Windows.Forms.Button orderitemIDDELETE;
@@ -235,5 +256,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button EXIT;
+        private System.Windows.Forms.Button UPDATE;
+        private System.Windows.Forms.Button READ;
     }
 }
