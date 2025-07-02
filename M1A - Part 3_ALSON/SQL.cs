@@ -199,8 +199,6 @@ namespace M1A___Part_3_ALSON
         }
 
 
-
-
         public static DataTable RetrieveAllCustomers()
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
@@ -274,7 +272,107 @@ namespace M1A___Part_3_ALSON
                     return table;
                 }
             }
-        }   
+        }
+
+        // UPDATE
+        public static void UpdateCustomer(int customerID, string firstName, string lastName, string address, string phoneNumber, string email)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "UPDATE Customer SET FirstName = :firstName, LastName = :lastName, Address = :address, " +
+                    "PhoneNumber = :phoneNumber, Email = :email WHERE CustomerID = :customerID", conn))
+                {
+                    cmd.Parameters.Add(":firstName", OracleDbType.Varchar2).Value = firstName;
+                    cmd.Parameters.Add(":lastName", OracleDbType.Varchar2).Value = lastName;
+                    cmd.Parameters.Add(":address", OracleDbType.Varchar2).Value = address;
+                    cmd.Parameters.Add(":phoneNumber", OracleDbType.Varchar2).Value = phoneNumber;
+                    cmd.Parameters.Add(":email", OracleDbType.Varchar2).Value = email;
+                    cmd.Parameters.Add(":customerID", OracleDbType.Int32).Value = customerID;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UpdateProduct(int productId, string productName, string description, decimal price, string category)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "UPDATE Product SET ProductName = :productName, Description = :description, Price = :price, Category = :category WHERE ProductID = :productId", conn))
+                {
+                    cmd.Parameters.Add(":productName", OracleDbType.Varchar2).Value = productName;
+                    cmd.Parameters.Add(":description", OracleDbType.Varchar2).Value = description;
+                    cmd.Parameters.Add(":price", OracleDbType.Decimal).Value = price;
+                    cmd.Parameters.Add(":category", OracleDbType.Varchar2).Value = category;
+                    cmd.Parameters.Add(":productId", OracleDbType.Int32).Value = productId;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UpdateOrder(int orderId, int customerId, DateTime orderDate, decimal totalAmount, string status)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "UPDATE Orders2 SET CustomerID = :customerId, OrderDate = :orderDate, TotalAmount = :totalAmount, OrderStatus = :status WHERE OrderID = :orderId", conn))
+                {
+                    cmd.Parameters.Add(":customerId", OracleDbType.Int32).Value = customerId;
+                    cmd.Parameters.Add(":orderDate", OracleDbType.Date).Value = orderDate;
+                    cmd.Parameters.Add(":totalAmount", OracleDbType.Decimal).Value = totalAmount;
+                    cmd.Parameters.Add(":status", OracleDbType.Varchar2).Value = status;
+                    cmd.Parameters.Add(":orderId", OracleDbType.Int32).Value = orderId;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UpdateOrderItem(int orderItemId, int orderId, int productId, int quantity, decimal price)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "UPDATE OrderItem SET OrderID = :orderId, ProductID = :productId, Quantity = :quantity, ItemPrice = :price WHERE OrderItemID = :orderItemId", conn))
+                {
+                    cmd.Parameters.Add(":orderId", OracleDbType.Int32).Value = orderId;
+                    cmd.Parameters.Add(":productId", OracleDbType.Int32).Value = productId;
+                    cmd.Parameters.Add(":quantity", OracleDbType.Int32).Value = quantity;
+                    cmd.Parameters.Add(":price", OracleDbType.Decimal).Value = price;
+                    cmd.Parameters.Add(":orderItemId", OracleDbType.Int32).Value = orderItemId;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UpdatePayment(int paymentId, int orderId, DateTime paymentDate, string method, string status)
+        {
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand(
+                    "UPDATE Payment SET OrderID = :orderId, PaymentDate = :paymentDate, PaymentMethod = :method, PaymentStatus = :status WHERE PaymentID = :paymentId", conn))
+                {
+                    cmd.Parameters.Add(":orderId", OracleDbType.Int32).Value = orderId;
+                    cmd.Parameters.Add(":paymentDate", OracleDbType.Date).Value = paymentDate;
+                    cmd.Parameters.Add(":method", OracleDbType.Varchar2).Value = method;
+                    cmd.Parameters.Add(":status", OracleDbType.Varchar2).Value = status;
+                    cmd.Parameters.Add(":paymentId", OracleDbType.Int32).Value = paymentId;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
 
 
     }

@@ -107,7 +107,6 @@ namespace M1A___Part_3_ALSON
             }
 
         }
-
         private void productIDDELETE_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(ProductIDDELETEButton.Text))

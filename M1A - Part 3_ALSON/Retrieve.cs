@@ -77,7 +77,7 @@ namespace M1A___Part_3_ALSON
             try
             {
                 DataTable data = SQL.RetrieveAllCustomers();
-                customerDataGridView.DataSource = data;
+                dataGridViewCustomer.DataSource = data;
             }
             catch (Exception ex)
             {

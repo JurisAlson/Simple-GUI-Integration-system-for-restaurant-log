@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.customerDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCustomer = new System.Windows.Forms.DataGridView();
             this.ProductDataGridView = new System.Windows.Forms.DataGridView();
             this.OrderDataGridView = new System.Windows.Forms.DataGridView();
             this.OrderItemDataGridView = new System.Windows.Forms.DataGridView();
@@ -37,20 +37,20 @@
             this.UPDATE = new System.Windows.Forms.Button();
             this.INSERT = new System.Windows.Forms.Button();
             this.DELETE = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderItemDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PaymentDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // customerDataGridView
+            // dataGridViewCustomer
             // 
-            this.customerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerDataGridView.Location = new System.Drawing.Point(12, 12);
-            this.customerDataGridView.Name = "customerDataGridView";
-            this.customerDataGridView.Size = new System.Drawing.Size(240, 437);
-            this.customerDataGridView.TabIndex = 0;
+            this.dataGridViewCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCustomer.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewCustomer.Name = "dataGridViewCustomer";
+            this.dataGridViewCustomer.Size = new System.Drawing.Size(240, 437);
+            this.dataGridViewCustomer.TabIndex = 0;
             // 
             // ProductDataGridView
             // 
@@ -133,10 +133,10 @@
             this.Controls.Add(this.OrderItemDataGridView);
             this.Controls.Add(this.OrderDataGridView);
             this.Controls.Add(this.ProductDataGridView);
-            this.Controls.Add(this.customerDataGridView);
+            this.Controls.Add(this.dataGridViewCustomer);
             this.Name = "Retrieve";
             this.Text = "Retrieve";
-            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderItemDataGridView)).EndInit();
@@ -147,7 +147,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView customerDataGridView;
+        private System.Windows.Forms.DataGridView dataGridViewCustomer;
         private System.Windows.Forms.DataGridView ProductDataGridView;
         private System.Windows.Forms.DataGridView OrderDataGridView;
         private System.Windows.Forms.DataGridView OrderItemDataGridView;
